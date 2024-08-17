@@ -1,7 +1,6 @@
 package kmp
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -16,10 +15,9 @@ func union(s1, s2 map[string]bool) map[string]bool {
 	return s_union
 }
 
-func vertical(pattern, text string) bool {
+func verticalSet(pattern, text string) bool {
 	var any func(func(map[string]bool) bool, []map[string]bool) bool
 	any = func(done func(map[string]bool) bool, accs []map[string]bool) bool {
-		fmt.Println(accs)
 		if len(accs) == 0 {
 			return false
 		}

@@ -7,7 +7,7 @@ import (
 // TestPresence calls a case where substring match exists.
 func TestVPresence(t *testing.T) {
 	pattern, text := "mama", "ammamaa"
-	if !vertical(pattern, text) {
+	if !verticalSet(pattern, text) {
 		t.Fatalf(`vertical("mama", "ammamaa") = false, want true`)
 	}
 }
@@ -15,7 +15,7 @@ func TestVPresence(t *testing.T) {
 // TestAbsence calls a case where substring match exists.
 func TestVAbsence(t *testing.T) {
 	pattern, text := "mava", "ammamaa"
-	if vertical(pattern, text) {
+	if verticalSet(pattern, text) {
 		t.Fatalf(`vertical("mava", "ammamaa") = true, want false`)
 	}
 }
