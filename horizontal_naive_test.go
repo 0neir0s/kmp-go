@@ -5,7 +5,7 @@ import (
 )
 
 // TestPresence calls a case where substring match exists.
-func TestPresence(t *testing.T) {
+func TestHPresence(t *testing.T) {
 	pattern, text := "mama", "ammamaa"
 	if !horizontal(pattern, text) {
 		t.Fatalf(`horizontal("mama", "ammamaa") = false, want true`)
@@ -13,7 +13,7 @@ func TestPresence(t *testing.T) {
 }
 
 // TestAbsence calls a case where substring match exists.
-func TestAbsence(t *testing.T) {
+func TestHAbsence(t *testing.T) {
 	pattern, text := "mava", "ammamaa"
 	if horizontal(pattern, text) {
 		t.Fatalf(`horizontal("mava", "ammamaa") = true, want false`)
