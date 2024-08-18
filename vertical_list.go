@@ -42,7 +42,7 @@ func verticalList(pattern, text string) bool {
 		if check(candidate, x) {
 			return append([]string{candidate[1:]}, step(acc[1:], x)...)
 		}
-		return []string{}
+		return step(acc[1:], x)
 	}
 
 	done := func(acc []string) bool {
