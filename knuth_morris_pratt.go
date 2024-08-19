@@ -4,16 +4,30 @@ import (
 	"strings"
 )
 
-func morris_pratt(pattern, text string) bool {
+func knuth_morris_pratt(pattern, text string) bool {
 
 	var step func(*tree, string) *tree
+
+	check := func(candidate *tree, x string) bool {
+		if candidate == nil {
+			return false
+		}
+		return strings.HasPrefix(candidate.top, x)
+	}
 
 	var make func([]string, *tree) *tree
 	make = func(slice []string, partial *tree) *tree {
 		if len(slice) == 0 {
 			return &tree{top: "", next: func() *tree { return nil }, rest: partial}
 		}
-		return &tree{top: slice[0], next: func() *tree { return make(slice[1:], step(partial, slice[0])) }, rest: partial}
+		n := func() *tree { return make(slice[1:], step(partial, slice[0])) }
+		var r_star *tree
+		if check(partial, slice[0]) {
+			r_star = partial.rest
+		} else {
+			r_star = partial
+		}
+		return &tree{top: slice[0], next: n, rest: r_star}
 	}
 
 	var any func(func(*tree) bool, []*tree) bool
@@ -35,13 +49,6 @@ func morris_pratt(pattern, text string) bool {
 	}
 
 	init := make(strings.Split(pattern, ""), nil)
-
-	check := func(candidate *tree, x string) bool {
-		if candidate == nil {
-			return false
-		}
-		return strings.HasPrefix(candidate.top, x)
-	}
 
 	step = func(acc *tree, x string) *tree {
 		if acc == nil {
